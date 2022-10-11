@@ -1,5 +1,6 @@
-# TODOList Server Side
-Lista de tareas renderizada desde el servidor.
+# Proyecto Server Side
+Tienda de ropa renderizada desde el servidor.
 
-## Importar la base de datos
-- importar desde PHPMyAdmin (o cualquiera) database/db_tasks.php
+# TUDAI-TPE-WEB 2
+Agustin Gonzalorena 
+

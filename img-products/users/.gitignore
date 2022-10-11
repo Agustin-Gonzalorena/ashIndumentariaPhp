@@ -1,0 +1,4 @@
+
+#ingnorar archivos subidos por el usuario, pero no la carpeta sino se rompe.
+*
+!.gitignore

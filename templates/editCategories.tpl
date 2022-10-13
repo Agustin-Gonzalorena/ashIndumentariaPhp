@@ -1,7 +1,13 @@
 {include file="header.tpl"}
+{if $successMsg}
+    <p class="alert alert-success mt-3 text-center">{$successMsg}</p>
+{/if}
+{if $errorMsg}
+    <p class="alert alert-danger mt-3 text-center">{$errorMsg}</p>
+{/if}
 <h1>Agregar Categoria:</h1>
 <p class="alert alert-dark mt-3">Si agrega un nuevo tipo de producto, contáctese con el equipo de Front para el
-    rediseño de la pagina</p>
+    rediseño de la pagina.</p>
 <div>
     <form action="addCategory" method="POST">
         <table class="table table-dark table-striped">
@@ -21,7 +27,8 @@
     </form>
 </div>
 <h1>Lista de Categorias:</h1>
-<p class="alert alert-dark mt-3">Antes de eliminar una categoria, asegúrese de haber eliminado todos los productos de
+<p class="alert alert-dark mt-3">Antes de eliminar una categoria, asegúrese de haber eliminado
+    todos los productos de
     está.</p>
 <table class="table table-dark table-striped">
     <thead>

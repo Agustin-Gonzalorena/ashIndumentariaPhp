@@ -54,12 +54,36 @@ switch ($params[0]) {
         break;
     case 'logout':
         $authController->logout();
-        break;        
+        break;
+    case 'signUp':
+        if(!empty($params[1]))
+            $authController->showSignUp($params[1]);
+        else
+            $authController->showSignUp();
+        break;
+    case 'validateSignUp':
+        $authController->addUser();
+        break;
+    case 'profile':
+        $mainController->showProfile();
+        break;   
+    case 'listUsers':
+        $adminController->listUsers();
+        break;
+    case 'updateAdmin':
+        $adminController->updateAdmin($params[1]);
+        break;
+    case 'deleteUser':
+        $adminController->deleteUser($params[1]);
+        break;           
     case 'adminPage':
         $adminController->showAdminPage();
         break;
     case 'listProducts':
-        $editsProductsController->listProducts();
+        if(!empty($params[1]))
+            $editsProductsController->listProducts($params[1]);
+        else
+            $editsProductsController->listProducts();
         break;
     case 'editProduct':
         $editsProductsController->editProduct($params[1]);
@@ -74,7 +98,10 @@ switch ($params[0]) {
         $editsProductsController->deleteProduct($params[1]);
         break;
     case 'editCategories':
-        $editCategoriesController->showEditCategories();
+        if(!empty($params[1]))
+            $editCategoriesController->showEditCategories($params[1]);
+        else
+            $editCategoriesController->showEditCategories();
         break;
     case 'editCategory':
         $editCategoriesController->showEditCategory($params[1]);

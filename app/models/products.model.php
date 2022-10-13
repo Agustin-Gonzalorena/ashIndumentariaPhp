@@ -18,16 +18,20 @@ class productsModel{
         $products = $query->fetchAll(PDO::FETCH_OBJ);
         return $products;
     }
-    function update($id,$name,$description,$stock,$price,$item,$image=null){
+    function update($id,$name,$description,$stock,$price,$type,$item,$image=null){
         $pathImg = null;
         if ($image)
             $pathImg = $this->uploadImage($image);
         else{
             $pathImg=$item;
         }
-
-        $query=$this->db->prepare("UPDATE products SET `name`=?,`description`=?,`image`=?,`price`=?, `stock`=? WHERE id=? ");
-        $query->execute([$name,$description,$pathImg,$price,$stock,$id]);
+        if($type==null){
+            $query=$this->db->prepare("UPDATE products SET `name`=?,`description`=?,`image`=?,`price`=?, `stock`=? WHERE id=? ");
+            $query->execute([$name,$description,$pathImg,$price,$stock,$id]); 
+        }else{
+            $query=$this->db->prepare("UPDATE products SET `name`=?,`description`=?,`image`=?,`price`=?, `stock`=?, `id_types`=? WHERE id=? ");
+            $query->execute([$name,$description,$pathImg,$price,$stock,$type,$id]);
+        }
     }
 
     private function uploadImage($image){

@@ -16,23 +16,19 @@ class editsProductsController{
 
 
     function listProducts($msg=null){
-        if(!$msg){
-            $this->checkLoggedIn();
-            }
+        $this->checkLoggedIn(); 
         $products=$this->productsModel->getAll();
         $productsAndType=$this->typeModel->getProductsAndTypes($products);
         $category=$this->typeModel->getTypeProducts();
-        $this->view->listProducts($productsAndType,$category);
+        $this->view->listProducts($productsAndType,$category,$msg);
     }
 
     function editProduct($id){
-        
         $this->checkLoggedIn();
-        
         $products=$this->productsModel->getAll();
         $productsAndType=$this->typeModel->getProductsAndTypes($products);
         $category=$this->typeModel->getTypeProducts();
-        $this->view->showEditProduct($id,$productsAndType,$category,);
+        $this->view->showEditProduct($id,$productsAndType,$category);
     }
 
     function updateProduct($id){
@@ -43,11 +39,12 @@ class editsProductsController{
         $stock = $_POST['stock'];
         $price = $_POST['price'];
         $type = $_POST['type'];
-    
+        
+
        if($_FILES['input_name']['type'] == "image/jpg" || $_FILES['input_name']['type'] == "image/jpeg" 
                     || $_FILES['input_name']['type'] == "image/png" ) {
                     $item='';
-                    $this->productsModel->update($id,$name,$description,$stock,$price,$item, $_FILES['input_name']['tmp_name']);
+                    $this->productsModel->update($id,$name,$description,$stock,$price,$type,$item, $_FILES['input_name']['tmp_name']);
                 }
                 else {
                     $item='';
@@ -56,9 +53,10 @@ class editsProductsController{
                         if($product->id==$id)
                             $item=$product->image;
                     }
-                    $this->productsModel->update($id,$name,$description,$stock,$price,$item);
+                    $this->productsModel->update($id,$name,$description,$stock,$price,$type,$item);
                 }
-        header("Location: " . BASE_URL. 'editProduct/'.$id);
+        $msg="update";
+        header("Location: " . BASE_URL. 'listProducts/'.$msg);
     }
 
     function addProduct(){
@@ -79,14 +77,16 @@ class editsProductsController{
                     
                     $this->productsModel->addProduct($name,$description,$stock,$price,$type);
                 }
-        header("Location: " . BASE_URL. 'listProducts');
+        $msg="add";
+        header("Location: " . BASE_URL. 'listProducts/'.$msg);
     }
 
 
     function deleteProduct($id){
         $this->checkLoggedIn();
         $this->productsModel->deleteProduct($id);
-        header("Location: " . BASE_URL. 'listProducts');
+        $msg="delete";
+        header("Location: " . BASE_URL. 'listProducts/'.$msg);
     }
     
 
@@ -97,6 +97,11 @@ class editsProductsController{
         if(!isset($_SESSION['USER_ID'])){
             header("Location: " . BASE_URL. 'login');
             die();
+        }
+        else{
+            if($_SESSION['ADMIN']==0)
+            header("Location: ". BASE_URL. 'nono');
+    
         }
     }
 }

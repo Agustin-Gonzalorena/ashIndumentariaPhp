@@ -9,8 +9,25 @@ class editsProductsView{
         $this->smarty = new Smarty();
     }
 
-    function listProducts($products,$category){
+    function listProducts($products,$category,$msg){
         arsort($products);
+        $successMsg='';
+        switch($msg){
+            case 'add':
+                $successMsg='Producto AGREGADO correctamente.';
+                break;
+            case 'delete':
+                $successMsg='Producto ELIMINADO correctamente.';
+                break;
+            case 'update':
+                $successMsg='Producto MODIFICADO correctamente.';
+                break;
+            default:
+                $successMsg='';
+                break;
+        }
+        
+        $this->smarty->assign('successMsg',$successMsg);
         $this->smarty->assign('category',$category);
         $this->smarty->assign('products',$products);
         $this->smarty->display('listProducts.tpl');

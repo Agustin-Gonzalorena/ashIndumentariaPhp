@@ -12,6 +12,7 @@ a {
     margin: 0;
     margin-top: 15px;
     width: 90%;
+    min-height: 70vh;
 }
 
 header {
@@ -69,6 +70,10 @@ header a {
     padding: 8px;
     margin: 0;
     margin-right: 10px;
+}
+
+.nameUser {
+    padding: 8px !important;
 }
 
 /* ---------------footer---------------- */
@@ -262,6 +267,10 @@ header a {
 
 #listProduct {
     background-image: url('img/listProducts.png');
+}
+
+#listUsers {
+    background-image: url('img/listUsers.png');
 }
 
 #addCategories {

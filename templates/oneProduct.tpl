@@ -1,6 +1,11 @@
 {include file="header.tpl"}
 <div class="containerOneProduct">
-    {if !empty($product)}
+    {if empty($product)}
+        <div class="notProduct">
+            <h1>Producto no encontrado</h1>
+        </div>
+    {else}
+
         <div class="containerImage">
             <img src={$product->image} alt="">
         </div>
@@ -16,16 +21,12 @@
             <p class="descriptionProduct">Marca: {$product->brand}</p>
             <p class="descriptionProduct">{$product->description}</p>
         </div>
+    {/if}
 
 
 
+</div>
 
-    </div>
-{else}
-    <div class="notProduct">
-        <h1>Producto no encontrado</h1>
-    </div>
-{/if}
 
 
 

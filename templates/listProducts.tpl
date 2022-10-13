@@ -1,4 +1,7 @@
 {include file="header.tpl"}
+{if $successMsg}
+    <p class="alert alert-success mt-3 text-center">{$successMsg}</p>
+{/if}
 <h1 class="mt-2">Agregar Producto:</h1>
 <div>
     <form action="addProduct" method="POST" enctype="multipart/form-data">

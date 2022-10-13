@@ -12,9 +12,9 @@ class authController{
         $this->view = new AuthView();
     }
 
-    function showFormLogin(){
+    function showFormLogin($msg=null){
         $this->checkLoggedIn();
-        $this->view->showFormLogin();
+        $this->view->showFormLogin($msg);
     }
     
     function validateUser(){
@@ -24,27 +24,61 @@ class authController{
         $userName = $_POST['userName'];
         $password = $_POST['password'];
 
-        $user = $this->model->getUserByEmail($userName);
+        $user = $this->model->getUser($userName);
 
         if ($user && password_verify($password, $user->password)) {
             session_start();
             $_SESSION['USER_ID'] = $user->id;
             $_SESSION['USER_userName'] = $user->userName;
             $_SESSION['IS_LOGGED'] = true;
+            $_SESSION['USER_NAME']  = $user->name;
+            $_SESSION['USER_LASTNAME'] =$user->lastName;
+            $_SESSION['ADMIN']=$user->admin;
 
-            header("Location: " . BASE_URL. 'adminPage');
+            header("Location: " . BASE_URL);
         } else {
-           $this->view->showFormLogin("El usuario o la contraseña no existe.");
+           $this->view->showFormLogin("error");
         } 
     }
-    public function logout() {
+    function logout() {
         session_start();
         session_destroy();
         header("Location: " . BASE_URL);
     }
 
-
+    function showSignUp($msg=null){
+        $this->checkLoggedIn();
+        
+        if($msg)
+            $msg='userDuplicate';
+        $this->view->showSignUp($msg);
+    }
+    function addUser(){
+        $msg='';
+        $name=$_POST['name'];
+        $lastName=$_POST['lastName'];
+        $userName=$_POST['userName'];
+        $password=$_POST['password'];
+        $checkPassword=$_POST['checkPassword'];
+        
+        if($password !=$checkPassword){
+            $msg='errorPasswords';
+            $this->view->showSignUp($msg);
+        }
+        elseif(empty($userName)){
+            $msg='errorUser';
+            $this->view->showSignUp($msg);
+        }
+        else{
+            $pass = password_hash($password, PASSWORD_BCRYPT);
+            $this->model->addUser($name,$lastName,$userName,$pass);
+            $msg='addUser';
+            $this->view->showFormLogin($msg);
+        }
     
+    }
+    
+
     private function checkLoggedIn(){
         session_start();
         if(isset($_SESSION['USER_ID'])){

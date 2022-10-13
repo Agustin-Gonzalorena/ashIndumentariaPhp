@@ -14,6 +14,14 @@
 
         </div>
     </a>
+    <div class="divider">
+    </div>
+    <a href="listUsers">
+        <div class="options" id="listUsers">
+            <p>Lista de Usuarios</p>
+
+        </div>
+    </a>
 
 
 

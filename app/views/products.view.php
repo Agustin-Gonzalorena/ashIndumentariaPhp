@@ -10,7 +10,7 @@ class productsView{
     }
 
     function showAllProducts($products,$category){
-        
+        session_start();
         $this->categories($category);
         $this->smarty->assign('products', $products);
         $this->smarty->assign('category', $category);
@@ -51,6 +51,7 @@ class productsView{
     }
 
     function showProductFilter($params,$products,$category,$type){
+        session_start();
         $array=array();
         if($params=='all'){
             foreach($products as $item)

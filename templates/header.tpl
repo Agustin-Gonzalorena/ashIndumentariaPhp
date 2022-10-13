@@ -27,9 +27,6 @@
             <li class="nav-item"><a class="nav-link active" aria-current="page" href="home">INICIO</a></li>
             <li class="nav-item"><a class="nav-link" href="allProducts">PRODUCTOS</a></li>
             <li class="nav-item"><a class="nav-link" href="about">QUIENES SOMOS</a></li>
-            {if isset($smarty.session.USER_ID)}
-              <li class="nav-item"><a class="nav-link" href="adminPage">ADMIN PAGE</a></li>
-            {/if}
           </ul>
         </div>
     </div>
@@ -41,9 +38,18 @@
           <p>Login</p>
         </a>
       {else}
-        <a href="logout">
-          <p>Logout</p>
+        <a class="nameUser nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {$smarty.session.USER_NAME}
         </a>
+        <ul class="dropdown-menu dropdown-menu-dark">
+          {if $smarty.session.ADMIN==1}
+            <li><a class="dropdown-item" href="adminPage">ADMIN PAGE</a></li>
+          {/if}
+          {if $smarty.session.USER_NAME}
+            <li><a class="dropdown-item" href="profile">PERFIL</a></li>
+          {/if}
+          <li><a class="dropdown-item text-secondary" href="logout">Logout</a></li>
+        </ul>
       {/if}
 
     </div>

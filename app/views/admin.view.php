@@ -12,4 +12,9 @@ class adminView{
     function showAdminPage(){
         $this->smarty->display('adminPage.tpl');
     }
+    function showListUsers($users,$msg=null){
+        $this->smarty->assign('error',$msg);
+        $this->smarty->assign('users',$users);
+        $this->smarty->display('listUsers.tpl');
+    }
 }

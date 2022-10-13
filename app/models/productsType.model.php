@@ -56,7 +56,9 @@ class productsTypeModel{
         $query->execute([$id]);
         }
         catch(PDOException){
-
+            $msg='error';
+            header("Location: " . BASE_URL. 'editCategories/'.$msg);
+            exit;
         }
     }
     

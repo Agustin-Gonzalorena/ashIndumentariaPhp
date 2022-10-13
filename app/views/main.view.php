@@ -28,4 +28,8 @@ class mainView{
         session_start();
         $this->smarty->display('notFound.tpl');
     }
+    function showProfile(){
+        
+        $this->smarty->display('profilePage.tpl');
+    }
 }

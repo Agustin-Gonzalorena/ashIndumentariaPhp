@@ -43,6 +43,9 @@ class editCategoriesController{
         header("Location: " . BASE_URL. 'editCategories/'.$msg);
     }
     function addCategory(){
+        if(empty($_POST['type'])){
+            header("Location: ".BASE_URL.'editCategories');
+        }
         $this->checkLoggedIn();
 
         $type=$_POST['type'];

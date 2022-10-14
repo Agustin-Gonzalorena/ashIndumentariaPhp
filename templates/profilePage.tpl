@@ -12,15 +12,24 @@
         {/if}
     </div>
     <div class="p-4 border border-dark rounded">
+        {if $error}
+            <div class="alert alert-danger mt-3">
+                {$error}
+            </div>
+        {elseif $change}
+            <div class="alert alert-success mt-3">
+                {$change}
+            </div>
+        {/if}
         <h3>Cambiar contraseña:</h3>
-        <form action="">
+        <form action="changePassword" method="POST">
             <div class="form-group">
                 <label>Nueva contraseña:</label>
-                <input type="password" required class="form-control" name="password">
+                <input type="password" class="form-control" name="password">
             </div>
             <div class="form-group">
                 <label>Repetir contraseña:</label>
-                <input type="password" required class="form-control" name="checkPassword">
+                <input type="password" class="form-control" name="checkPassword">
             </div>
             <button type="submit" class="btn btn-dark mt-3">Confirmar</button>
         </form>

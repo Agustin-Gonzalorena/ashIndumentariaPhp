@@ -5,6 +5,7 @@ require_once 'app/controllers/auth.controller.php';
 require_once 'app/controllers/editsProducts.controller.php';
 require_once 'app/controllers/main.controller.php';
 require_once 'app/controllers/editCategories.controller.php';
+require_once 'app/controllers/users.controller.php';
 
 define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
 
@@ -23,6 +24,7 @@ $adminController= new adminController();
 $authController = new AuthController();
 $editsProductsController=new editsProductsController();
 $editCategoriesController=new editCategoriesController();
+$usersController=new usersController();
 
 switch ($params[0]) {
     case 'home':
@@ -74,8 +76,11 @@ switch ($params[0]) {
         $adminController->updateAdmin($params[1]);
         break;
     case 'deleteUser':
-        $adminController->deleteUser($params[1]);
-        break;           
+        $usersController->deleteUser();
+        break; 
+    case 'changePassword':
+        $usersController->changePassword();
+        break;             
     case 'adminPage':
         $adminController->showAdminPage();
         break;

@@ -30,19 +30,7 @@ class AuthView {
     }
     
     function showSignUp($msg=null){
-        switch($msg){
-            case 'errorUser':
-                $msg='El nombre de usuario es obligatorio.';
-                break;
-            case 'errorPasswords':
-                $msg='Las contraseñas no coinciden.';
-                break;
-            case 'userDuplicate':
-                $msg='El nombre de usuario ya existe.';
-                break;
-            default:
-                $msg='';
-        }
+        
         $this->smarty->assign('msg',$msg);
         $this->smarty->display('signUp.tpl');
     }

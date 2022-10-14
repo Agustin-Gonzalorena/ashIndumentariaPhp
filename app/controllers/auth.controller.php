@@ -50,32 +50,50 @@ class authController{
         $this->checkLoggedIn();
         
         if($msg)
-            $msg='userDuplicate';
+            $msg='El nombre de usuario ya existe.';
         $this->view->showSignUp($msg);
     }
+    
     function addUser(){
-        $msg='';
+        if(empty($_POST['userName'])){
+            $msg='El nombre de usuario es obligatorio.';
+            $this->view->showSignUp($msg);;
+        }
         $name=$_POST['name'];
         $lastName=$_POST['lastName'];
         $userName=$_POST['userName'];
         $password=$_POST['password'];
         $checkPassword=$_POST['checkPassword'];
         
-        if($password !=$checkPassword){
-            $msg='errorPasswords';
+        
+        if(empty($name)){
+            $msg='El nombre es obligatorio.';
             $this->view->showSignUp($msg);
         }
-        elseif(empty($userName)){
-            $msg='errorUser';
+        elseif(empty($lastName)){
+            $msg='El apellido es obligatorio.';
+            $this->view->showSignUp($msg);
+        }
+        elseif(empty($password)){
+            $msg='La contraseña es obligatoria.';
+            $this->view->showSignUp($msg);
+        }
+        elseif(empty($checkPassword)){
+            $msg='Tiene que confirmar la contraseña.';
             $this->view->showSignUp($msg);
         }
         else{
-            $pass = password_hash($password, PASSWORD_BCRYPT);
-            $this->model->addUser($name,$lastName,$userName,$pass);
-            $msg='addUser';
-            $this->view->showFormLogin($msg);
+            if($password !=$checkPassword){
+                $msg='Las contraseñas no coinciden.';
+                $this->view->showSignUp($msg);
+            }
+            else{
+                $pass = password_hash($password, PASSWORD_BCRYPT);
+                $this->model->addUser($name,$lastName,$userName,$pass);
+                $msg='addUser';
+                $this->view->showFormLogin($msg);
+            }
         }
-    
     }
     
 

@@ -46,19 +46,8 @@ class adminController{
             header("Location: ". BASE_URL. 'listUsers');
         }
     }
-    function deleteUser($id){
-        $this->checkLoggedIn();
-        $this->checkDelete();
-        header("Location: ".BASE_URL);
-    }
     
-    private function checkDelete(){
-        if($_SESSION['USER_ID']==1){
-            header("Location: ".BASE_URL.'profile');
-            die();
-        }
-    }
-    function checkLoggedIn(){
+    private function checkLoggedIn(){
         session_start();
         if(!isset($_SESSION['USER_ID'])){
             header("Location: " . BASE_URL. 'login');

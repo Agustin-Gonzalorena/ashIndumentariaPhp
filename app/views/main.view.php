@@ -28,8 +28,17 @@ class mainView{
         session_start();
         $this->smarty->display('notFound.tpl');
     }
-    function showProfile(){
-        
+    function showProfile($msg=null){
+        $error=null;
+        $change=null;
+        if($msg=="errorPassword"){
+            $error="Las contraseñas no coinciden.";
+        }
+        elseif($msg=="changePassword"){
+            $change="Se cambio su contraseña con exito.";
+        }
+        $this->smarty->assign('change',$change);
+        $this->smarty->assign('error',$error);
         $this->smarty->display('profilePage.tpl');
     }
 }

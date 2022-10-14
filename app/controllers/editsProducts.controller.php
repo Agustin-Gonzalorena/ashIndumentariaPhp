@@ -60,6 +60,9 @@ class editsProductsController{
     }
 
     function addProduct(){
+        if(empty($_POST['name'])){
+            header("Location: ".BASE_URL.'listProducts');
+        }
         $this->checkLoggedIn();
 
         $name = $_POST['name'];

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-10-2022 a las 17:11:19
+-- Tiempo de generación: 14-10-2022 a las 02:40:19
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `db_ash`
 --
+CREATE DATABASE IF NOT EXISTS `db_ash` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `db_ash`;
 
 -- --------------------------------------------------------
 
@@ -69,7 +71,7 @@ INSERT INTO `products` (`id`, `name`, `description`, `image`, `price`, `stock`, 
 (1024, 'Remera Adidas en Movimiento', 'Excelente para usarla todos los dias y estar vestido con estilo.', 'img-products/adidas_movimiento.png', 5400, 12, 1),
 (1026, 'Remera Adidas Entrenamiento', 'Excelente para usarla todos los dias y estar vestido con estilo.', 'img-products/adidas_militar.png', 5300, 6, 1),
 (1027, 'Remera Adidas Mel', 'Excelente para usarla todos los dias y estar vestido con estilo.', 'img-products/adidas_mel.png', 4300, 12, 1),
-(1028, 'Campera Adidas Inflada', 'Abrigada y portable. 100% impermeable.', 'img-products/c_inflada.png', 18900, 15, 7);
+(1087, 'Campera Adidas Inflada', 'Abrigada y portable. 100% impermeable.', 'img-products/c_inflada.png', 18900, 12, 7);
 
 -- --------------------------------------------------------
 
@@ -105,16 +107,22 @@ INSERT INTO `type_products` (`id`, `type`, `brand`) VALUES
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `lastName` varchar(45) NOT NULL,
   `userName` varchar(15) NOT NULL,
-  `password` varchar(300) NOT NULL
+  `password` varchar(300) NOT NULL,
+  `admin` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `userName`, `password`) VALUES
-(5, 'admin', '$2a$12$Q7MQw7h8.3Wl1/B.bvbGMek9FpiydrPLd3rwT6VwoQ2yqkUXohpqG');
+INSERT INTO `users` (`id`, `name`, `lastName`, `userName`, `password`, `admin`) VALUES
+(1, 'Agustin', 'Gonzalorena', 'admin', '$2y$10$5XWONlR1fDM5CcjDJvaZYuuHib5ClqYI.gZgJ2yeoGgJuzT5dCVOi', 1),
+(3, 'Fede', 'Novelli', 'fdPoint', '$2a$12$Q7MQw7h8.3Wl1/B.bvbGMek9FpiydrPLd3rwT6VwoQ2yqkUXohpqG', 0),
+(33, 'Zoé', 'Casabone', 'zoe', '$2y$10$hmyoxLolASwHlNKy5erL7eqegZFCRXf/bgy2pKgO9t5qFLX02vNXi', 0),
+(34, 'Francisco', 'Rappazzini', 'rappa', '$2y$10$pQOzVi9ML4Fy6YDRac1i6.o4R9rxJdv.cTiRktVDgWWA8KkZoBfza', 1);
 
 --
 -- Índices para tablas volcadas
@@ -148,19 +156,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1073;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1090;
 
 --
 -- AUTO_INCREMENT de la tabla `type_products`
 --
 ALTER TABLE `type_products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- Restricciones para tablas volcadas

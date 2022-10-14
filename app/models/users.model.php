@@ -37,4 +37,12 @@ class UserModel {
         $query=$this->db->prepare("UPDATE users SET `admin`=? WHERE id=? ");
         $query->execute([$value,$id]);
     }
+    function deleteUser($id){
+        $query = $this->db->prepare('DELETE FROM users WHERE id = ?');
+        $query->execute([$id]);
+    }
+    function changePassword($password,$id){
+        $query=$this->db->prepare("UPDATE users SET `password`=? WHERE id=? ");
+        $query->execute([$password,$id]);
+    }
 }

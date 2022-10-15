@@ -18,7 +18,8 @@ class productsModel{
         $products = $query->fetchAll(PDO::FETCH_OBJ);
         return $products;
     }
-    function update($id,$name,$description,$stock,$price,$type,$item,$image=null){
+
+    function updateProduct($id,$name,$description,$stock,$price,$type,$item,$image=null){
         $pathImg = null;
         if ($image)
             $pathImg = $this->uploadImage($image);
@@ -38,7 +39,6 @@ class productsModel{
         $target = 'img-products/users/' . uniqid() . '.jpg';
         move_uploaded_file($image, $target);
         return $target;
-
     }
 
     function addProduct($name,$description,$stock,$price,$type,$image=null){
@@ -54,5 +54,4 @@ class productsModel{
         $query = $this->db->prepare('DELETE FROM products WHERE id = ?');
         $query->execute([$id]);
     }
-    
 }

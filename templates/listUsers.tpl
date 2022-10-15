@@ -1,4 +1,5 @@
-{include file="header.tpl"}
+{include file="header.tpl" title="Lista Usuarios"}
+
 <div>
     {if $error}
         <p class="alert alert-danger mt-3 text-center">{$error}</p>
@@ -32,9 +33,5 @@
         </tbody>
     </table>
 </div>
-
-
-
-
 
 {include file="footer.tpl"}

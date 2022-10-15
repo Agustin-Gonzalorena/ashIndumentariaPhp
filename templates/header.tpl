@@ -10,7 +10,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
   <link rel="stylesheet" href="css/styles.css">
-  <title>TUDAI - TodoList</title>
+  <title>Ash {$title|default:"Indumentaria"}</title>
+  <link rel="icon" href="css/img/logo.png">
 </head>
 
 <body>
@@ -29,8 +30,7 @@
             <li class="nav-item"><a class="nav-link" href="about">QUIENES SOMOS</a></li>
           </ul>
         </div>
-    </div>
-    </nav>
+      </nav>
     </div>
     <div class="mirror">
       {if !isset($smarty.session.USER_ID)}
@@ -51,7 +51,6 @@
           <li><a class="dropdown-item text-secondary" href="logout">Logout</a></li>
         </ul>
       {/if}
-
     </div>
   </header>
 

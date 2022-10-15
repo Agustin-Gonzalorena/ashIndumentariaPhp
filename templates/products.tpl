@@ -1,7 +1,6 @@
-{include file="header.tpl"}
+{include file="header.tpl" title="Productos"}
 
 <div class="containerProducts">
-
     <div class="category">
         <h2>Categorias:</h2>
         <ul>
@@ -32,7 +31,6 @@
             </li>
         </ul>
     </div>
-
     <div class="productsCards">
         <section id="caja_remeras">
             {if empty($products)}
@@ -51,4 +49,5 @@
         </section>
     </div>
 </div>
+
 {include file="footer.tpl"}

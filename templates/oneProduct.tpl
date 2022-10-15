@@ -1,16 +1,15 @@
-{include file="header.tpl"}
+{include file="header.tpl" title=$product->name}
+
 <div class="containerOneProduct">
     {if empty($product)}
         <div class="notProduct">
             <h1>Producto no encontrado</h1>
         </div>
     {else}
-
         <div class="containerImage">
             <img src={$product->image} alt="">
         </div>
         <div class="containerDetails">
-
             <p class="sold">Nuevo | 700 vendidos</p>
             <h1>{$product->name}</h1>
             <p class="score">★★★★★<span> (347) </span></p>
@@ -22,12 +21,6 @@
             <p class="descriptionProduct">{$product->description}</p>
         </div>
     {/if}
-
-
-
 </div>
-
-
-
 
 {include file="footer.tpl"}

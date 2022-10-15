@@ -1,4 +1,5 @@
-{include file="header.tpl"}
+{include file="header.tpl" title="Lista Productos"}
+
 {if $successMsg}
     <p class="alert alert-success mt-3 text-center">{$successMsg}</p>
 {/if}
@@ -35,8 +36,8 @@
                         <div class="col-15">
                             <div class="form-group">
                                 <select name="type" class="form-control">
-                                    {foreach from=$category item=$c}
-                                        <option value="{$c->id}">{$c->type} {$c->brand}</option>
+                                    {foreach from=$categories item=$category}
+                                        <option value="{$category->id}">{$category->type} {$category->brand}</option>
                                     {/foreach}
                                 </select>
                             </div>
@@ -81,4 +82,5 @@
         {/foreach}
     </tbody>
 </table>
+
 {include file="footer.tpl"}

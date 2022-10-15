@@ -1,4 +1,5 @@
-{include file="header.tpl"}
+{include file="header.tpl" title="Editar Categoria"}
+
 {if empty($category)}
     <div class="notProduct">
         <h1>Categoria no encontrada</h1>
@@ -24,4 +25,5 @@
         </form>
     </div>
 {/if}
+
 {include file="footer.tpl"}

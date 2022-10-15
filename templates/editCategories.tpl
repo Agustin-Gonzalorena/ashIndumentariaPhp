@@ -1,4 +1,5 @@
-{include file="header.tpl"}
+{include file="header.tpl" title="Lista Categorias"}
+
 {if $successMsg}
     <p class="alert alert-success mt-3 text-center">{$successMsg}</p>
 {/if}
@@ -41,16 +42,15 @@
         </tr>
     </thead>
     <tbody>
-        {foreach from=$category item=$item}
+        {foreach from=$categories item=$category}
             <tr>
-                <td>{$item->id}</td>
-                <td>{$item->type}</td>
-                <td>{$item->brand}</td>
-                <td><a class="btn btn-warning" type="button" href="editCategory/{$item->id}">✎</a></td>
-                <td><a class="btn btn-danger" type="button" href="deleteCategory/{$item->id}">X</a></td>
+                <td>{$category->id}</td>
+                <td>{$category->type}</td>
+                <td>{$category->brand}</td>
+                <td><a class="btn btn-warning" type="button" href="editCategory/{$category->id}">✎</a></td>
+                <td><a class="btn btn-danger" type="button" href="deleteCategory/{$category->id}">X</a></td>
             </tr>
         {/foreach}
-
     </tbody>
 </table>
 

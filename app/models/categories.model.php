@@ -1,6 +1,6 @@
 <?php
 
-class productsTypeModel{
+class categoriesModel{
     private $db;
 
     function __construct(){
@@ -12,18 +12,23 @@ class productsTypeModel{
         return $db;
     }
 
-    function getTypeProducts() {
-        $query = $this->db->prepare("SELECT * FROM type_products");
+    function getAll() {
+        $query = $this->db->prepare("SELECT * FROM categories");
         $query->execute();
-        $products = $query->fetchAll(PDO::FETCH_OBJ);
-        return $products;
+        $categories = $query->fetchAll(PDO::FETCH_OBJ);
+        return $categories;
     }
 
-    function getProductsAndTypes($products) {
-        $db = $this->connect();
-        $query = $db->prepare("SELECT * FROM type_products WHERE id=?");
+    function getCategory($id){
+        $query = $this->db->prepare("SELECT * FROM categories WHERE id=?");
+        $query->execute([$id]);
+        $category=$query->fetch(PDO::FETCH_OBJ);
+        return $category;
+    }
+
+    function getProductsAndCategories($products) {
+        $query = $this->db->prepare("SELECT * FROM categories WHERE id=?");
         $arrayProducts=array();
-        
         foreach($products as $product) {
             $p = new stdClass();
             $p->id = $product->id;
@@ -34,26 +39,26 @@ class productsTypeModel{
             $p->price= $product->price;
             
             $query->execute(array($product->id_types));
-            $types = $query->fetchAll(PDO::FETCH_OBJ);
-            foreach($types as $type){
-            $p->brand= $type->brand;
-            $p->type= $type->type;
+            $categories = $query->fetchAll(PDO::FETCH_OBJ);
+
+            foreach($categories as $category){
+                $p->brand= $category->brand;
+                $p->type= $category->type;
             }
             array_push($arrayProducts, $p);
         }
-
         return $arrayProducts;
     }
 
     function updateCategory($id,$type,$brand){
-        $query=$this->db->prepare("UPDATE type_products SET `type`=?,`brand`=? WHERE id=? ");
+        $query=$this->db->prepare("UPDATE categories SET `type`=?,`brand`=? WHERE id=? ");
         $query->execute([$type,$brand,$id]);
     }
 
     function deleteCategory($id){
         try{
-        $query = $this->db->prepare('DELETE FROM type_products WHERE id = ?');
-        $query->execute([$id]);
+            $query = $this->db->prepare('DELETE FROM categories WHERE id = ?');
+            $query->execute([$id]);
         }
         catch(PDOException){
             $msg='error';
@@ -63,11 +68,7 @@ class productsTypeModel{
     }
     
     function addCategory($type,$brand){
-        $query = $this->db->prepare("INSERT INTO type_products (`type`, `brand`) VALUES (?, ?)");
+        $query = $this->db->prepare("INSERT INTO categories (`type`, `brand`) VALUES (?, ?)");
         $query->execute([$type,$brand]);
     }
-
-
-
-    
 }

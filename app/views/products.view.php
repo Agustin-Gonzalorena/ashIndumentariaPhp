@@ -1,7 +1,6 @@
 <?php
 require_once './libs/smarty/libs/Smarty.class.php';
 
-
 class productsView{
     private $smarty;
 
@@ -9,62 +8,87 @@ class productsView{
         $this->smarty = new Smarty();
     }
 
-    function showAllProducts($products,$category){
+    function showAllProducts($products,$categories){
         session_start();
-        $this->categories($category);
+        $this->categories($categories);
         $this->smarty->assign('products', $products);
-        $this->smarty->assign('category', $category);
         $this->smarty->display('products.tpl');
     }
-    function showProduct($params,$products){
+
+    function showProduct($id,$products){
         session_start();
-        foreach($products as $item){
-            if($item->id==$params){
-                $this->smarty->assign('product', $item);
+        foreach($products as $product){
+            if($product->id==$id){
+                $this->smarty->assign('product', $product);
             }
         }
-        
-        
         $this->smarty->display('oneProduct.tpl');
     }
 
-    function categories($category){
-        
+    function categories($categories){
         $remeras=array();
-        foreach($category as $item){
-            if($item->type=='remeras')
-                array_push($remeras, $item);          
-        }
         $buzos=array();
-        foreach($category as $item){
-            if($item->type=='buzos')
-                array_push($buzos, $item);          
-        }
         $camperas=array();
-        foreach($category as $item){
-            if($item->type=='camperas')
-                array_push($camperas, $item);          
+        foreach($categories as $category){
+            if($category->type=='remeras')
+                array_push($remeras, $category);
+            elseif($category->type=='buzos')
+                array_push($buzos, $category);
+            elseif($category->type=='camperas')
+                array_push($camperas, $category);             
         }
         $this->smarty->assign('remeras',$remeras);
         $this->smarty->assign('buzos',$buzos);
         $this->smarty->assign('camperas',$camperas);
     }
 
-    function showProductFilter($params,$products,$category,$type){
+    function showProductFilter($params,$products,$categories,$type){
         session_start();
-        $array=array();
+        $arrayProducts=array();
         if($params=='all'){
-            foreach($products as $item)
-                if($item->type==$type)
-                    array_push($array,$item);
+            foreach($products as $product)
+                if($product->type==$type)
+                    array_push($arrayProducts,$product);
         }else{
-            foreach($products as $item){
-                if($item->brand==$params and $item->type==$type)
-                    array_push($array,$item);
+            foreach($products as $product){
+                if($product->brand==$params and $product->type==$type)
+                    array_push($arrayProducts,$product);
             }
         }
-        $this->categories($category);
-        $this->smarty->assign('products', $array);
+        $this->categories($categories);
+        $this->smarty->assign('products', $arrayProducts);
         $this->smarty->display('products.tpl');
+    }
+    
+    function listProducts($products,$categories,$msg){
+        arsort($products);
+        $successMsg='';
+        switch($msg){
+            case 'add':
+                $successMsg='Producto AGREGADO correctamente.';
+                break;
+            case 'delete':
+                $successMsg='Producto ELIMINADO correctamente.';
+                break;
+            case 'update':
+                $successMsg='Producto MODIFICADO correctamente.';
+                break;
+            default:
+                $successMsg='';
+                break;
+        }
+        $this->smarty->assign('successMsg',$successMsg);
+        $this->smarty->assign('categories',$categories);
+        $this->smarty->assign('products',$products);
+        $this->smarty->display('listProducts.tpl');
+    }
+
+    function showEditProduct($id,$products,$categories){
+        foreach($products as $product){
+            if($product->id==$id)
+                $this->smarty->assign('product', $product);
+        }
+        $this->smarty->assign('categories',$categories);
+        $this->smarty->display('editProduct.tpl');
     }
 }

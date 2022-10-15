@@ -1,14 +1,15 @@
 <?php
 require_once './libs/smarty/libs/Smarty.class.php';
-class editCategoriesView{
+
+class categoriesView{
     private $smarty;
 
     function __construct() {
         $this->smarty = new Smarty();
     }
 
-    function showEditCategories($category,$products,$msg){
-        arsort($category);
+    function showEditCategories($categories,$products,$msg){
+        arsort($categories);
         $successMsg='';
         $errorMsg='';
         switch($msg){
@@ -32,15 +33,12 @@ class editCategoriesView{
         $this->smarty->assign('errorMsg',$errorMsg);
         $this->smarty->assign('successMsg',$successMsg);
         $this->smarty->assign('products',$products);
-        $this->smarty->assign('category',$category);
+        $this->smarty->assign('categories',$categories);
         $this->smarty->display('editCategories.tpl');
     }
     
-    function showEditCategory($category,$id){
-        foreach($category as $item)
-            if($item->id==$id)
-                $this->smarty->assign('category',$item);
+    function showEditCategory($category){
+        $this->smarty->assign('category',$category);
         $this->smarty->display('editCategory.tpl');
     }
-    
 }

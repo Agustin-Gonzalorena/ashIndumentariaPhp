@@ -1,4 +1,4 @@
-{include file="header.tpl"}
+{include file="header.tpl" title="Iniciar sesion"}
 
 <div class="mt-5 w-25 mx-auto">
     {if $addMsg}
@@ -15,7 +15,6 @@
             <label>Contraseña:</label>
             <input type="password" required class="form-control" name="password">
         </div>
-
         {if $error}
             <div class="alert alert-danger mt-3">
                 {$error}
@@ -25,4 +24,5 @@
         <a class="ms-3" href="signUp">¿No tenes cuenta? Registrate</a>
     </form>
 </div>
+
 {include file="footer.tpl"}

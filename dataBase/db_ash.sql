@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-10-2022 a las 02:40:19
+-- Tiempo de generación: 15-10-2022 a las 20:01:27
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -22,6 +22,32 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `db_ash` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `db_ash`;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL,
+  `type` varchar(45) NOT NULL,
+  `brand` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `categories`
+--
+
+INSERT INTO `categories` (`id`, `type`, `brand`) VALUES
+(1, 'remeras', 'Adidas'),
+(2, 'remeras', 'Nike'),
+(3, 'remeras', 'TuEstampado'),
+(4, 'buzos', 'Adidas'),
+(5, 'buzos', 'TuEstampado'),
+(6, 'buzos', 'Nike'),
+(7, 'camperas', 'Adidas'),
+(8, 'camperas', 'Montage');
 
 -- --------------------------------------------------------
 
@@ -76,32 +102,6 @@ INSERT INTO `products` (`id`, `name`, `description`, `image`, `price`, `stock`, 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `type_products`
---
-
-CREATE TABLE `type_products` (
-  `id` int(11) NOT NULL,
-  `type` varchar(45) NOT NULL,
-  `brand` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `type_products`
---
-
-INSERT INTO `type_products` (`id`, `type`, `brand`) VALUES
-(1, 'remeras', 'Adidas'),
-(2, 'remeras', 'Nike'),
-(3, 'remeras', 'TuEstampado'),
-(4, 'buzos', 'Adidas'),
-(5, 'buzos', 'TuEstampado'),
-(6, 'buzos', 'Nike'),
-(7, 'camperas', 'Adidas'),
-(8, 'camperas', 'Montage');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `users`
 --
 
@@ -120,8 +120,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `lastName`, `userName`, `password`, `admin`) VALUES
 (1, 'Agustin', 'Gonzalorena', 'admin', '$2y$10$5XWONlR1fDM5CcjDJvaZYuuHib5ClqYI.gZgJ2yeoGgJuzT5dCVOi', 1),
-(3, 'Fede', 'Novelli', 'fdPoint', '$2a$12$Q7MQw7h8.3Wl1/B.bvbGMek9FpiydrPLd3rwT6VwoQ2yqkUXohpqG', 0),
-(33, 'Zoé', 'Casabone', 'zoe', '$2y$10$hmyoxLolASwHlNKy5erL7eqegZFCRXf/bgy2pKgO9t5qFLX02vNXi', 0),
+(3, 'Fede', 'Novelli', 'fede', '$2y$10$pQOzVi9ML4Fy6YDRac1i6.o4R9rxJdv.cTiRktVDgWWA8KkZoBfza', 0),
+(33, 'Zoé', 'Casabone', 'zoe', '$2y$10$pQOzVi9ML4Fy6YDRac1i6.o4R9rxJdv.cTiRktVDgWWA8KkZoBfza', 0),
 (34, 'Francisco', 'Rappazzini', 'rappa', '$2y$10$pQOzVi9ML4Fy6YDRac1i6.o4R9rxJdv.cTiRktVDgWWA8KkZoBfza', 1);
 
 --
@@ -129,17 +129,17 @@ INSERT INTO `users` (`id`, `name`, `lastName`, `userName`, `password`, `admin`) 
 --
 
 --
+-- Indices de la tabla `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
   ADD KEY `type` (`id_types`);
-
---
--- Indices de la tabla `type_products`
---
-ALTER TABLE `type_products`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `users`
@@ -153,22 +153,22 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+
+--
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1090;
-
---
--- AUTO_INCREMENT de la tabla `type_products`
---
-ALTER TABLE `type_products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1100;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- Restricciones para tablas volcadas
@@ -178,7 +178,7 @@ ALTER TABLE `users`
 -- Filtros para la tabla `products`
 --
 ALTER TABLE `products`
-  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`id_types`) REFERENCES `type_products` (`id`);
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`id_types`) REFERENCES `categories` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,4 +1,5 @@
-{include file="header.tpl"}
+{include file="header.tpl" title="Nosotros"}
+
 <div class="container_about">
     <div class="img_logo">
         <h1 class="mb-4">ASH SHOP</h1>
@@ -7,4 +8,5 @@
         <p>Agustin Gonzalorena,TPE de Web 2!</p>
     </div>
 </div>
+
 {include file="footer.tpl"}

@@ -1,4 +1,5 @@
-{include file="header.tpl"}
+{include file="header.tpl" title="Pagina Admin"}
+
 <div class="containerAdminPage">
     <a href="listProducts">
         <div class="options" id="listProduct">
@@ -6,24 +7,18 @@
 
         </div>
     </a>
-    <div class="divider">
-    </div>
+    <div class="divider"></div>
     <a href="editCategories">
         <div class="options" id="addCategories">
             <p>Lista de Categoria</p>
-
         </div>
     </a>
-    <div class="divider">
-    </div>
+    <div class="divider"></div>
     <a href="listUsers">
         <div class="options" id="listUsers">
             <p>Lista de Usuarios</p>
-
         </div>
     </a>
-
-
-
 </div>
+
 {include file="footer.tpl"}

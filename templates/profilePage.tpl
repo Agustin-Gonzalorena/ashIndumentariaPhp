@@ -1,4 +1,5 @@
-{include file="header.tpl"}
+{include file="header.tpl" title="Perfil"}
+
 <div class="d-flex flex-column align-items-center  ">
     <div class="mb-5 mt-3 justify-content-start">
         <h1>Perfil del Usuario: {$smarty.session.USER_userName}</h1>
@@ -40,8 +41,6 @@
         <label class="mt-5 alert alert-danger">Elimine su cuenta de forma permanente:</label>
         <h2><a class="btn btn-danger " href="deleteUser/{$smarty.session.USER_ID}">Eliminar Cuenta</a></h2>
     {/if}
-
 </div>
-
 
 {include file="footer.tpl"}

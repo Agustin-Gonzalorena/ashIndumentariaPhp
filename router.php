@@ -1,10 +1,7 @@
 <?php
-require_once 'app/controllers/products.controller.php';
-require_once 'app/controllers/admin.controller.php';
-require_once 'app/controllers/auth.controller.php';
-require_once 'app/controllers/editsProducts.controller.php';
 require_once 'app/controllers/main.controller.php';
-require_once 'app/controllers/editCategories.controller.php';
+require_once 'app/controllers/products.controller.php';
+require_once 'app/controllers/categories.controller.php';
 require_once 'app/controllers/users.controller.php';
 
 define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
@@ -19,11 +16,8 @@ else {
 $params = explode('/', $action);
 
 $mainController=new mainController();
-$productController=new productsController();
-$adminController= new adminController();
-$authController = new AuthController();
-$editsProductsController=new editsProductsController();
-$editCategoriesController=new editCategoriesController();
+$productsController=new productsController();
+$categoriesController=new categoriesController();
 $usersController=new usersController();
 
 switch ($params[0]) {
@@ -34,46 +28,46 @@ switch ($params[0]) {
         $mainController->showAbout();
         break;
     case 'allProducts':
-        $productController->showAllProducts();
+        $productsController->showAllProducts();
         break;
     case 'product':
-        $productController->showProduct($params[1]);
+        $productsController->showProduct($params[1]);
         break;
     case 't-shirts':
-        $productController->showTshirts($params[1]);
+        $productsController->showTshirts($params[1]);
         break;
     case 'sweatshirt':
-        $productController->showSweatshirt($params[1]);
+        $productsController->showSweatshirt($params[1]);
         break;
     case 'jackets':
-        $productController->showJackets($params[1]);
+        $productsController->showJackets($params[1]);
         break;
     case 'login':
-        $authController->showFormLogin();
+        $usersController->showFormLogin();
         break;
     case 'validate':
-        $authController->validateUser();
+        $usersController->validateUser();
         break;
     case 'logout':
-        $authController->logout();
+        $usersController->logout();
         break;
     case 'signUp':
         if(!empty($params[1]))
-            $authController->showSignUp($params[1]);
+            $usersController->showSignUp($params[1]);
         else
-            $authController->showSignUp();
+            $usersController->showSignUp();
         break;
     case 'validateSignUp':
-        $authController->addUser();
+        $usersController->addUser();
         break;
     case 'profile':
-        $mainController->showProfile();
+        $usersController->showProfile();
         break;   
     case 'listUsers':
-        $adminController->listUsers();
+        $usersController->listUsers();
         break;
     case 'updateAdmin':
-        $adminController->updateAdmin($params[1]);
+        $usersController->updateAdmin($params[1]);
         break;
     case 'deleteUser':
         $usersController->deleteUser();
@@ -82,43 +76,43 @@ switch ($params[0]) {
         $usersController->changePassword();
         break;             
     case 'adminPage':
-        $adminController->showAdminPage();
+        $mainController->showAdminPage();
         break;
     case 'listProducts':
         if(!empty($params[1]))
-            $editsProductsController->listProducts($params[1]);
+            $productsController->listProducts($params[1]);
         else
-            $editsProductsController->listProducts();
+            $productsController->listProducts();
         break;
     case 'editProduct':
-        $editsProductsController->editProduct($params[1]);
+        $productsController->editProduct($params[1]);
         break;
     case 'updateProduct':
-        $editsProductsController->updateProduct($params[1]);
+        $productsController->updateProduct($params[1]);
         break;
     case 'addProduct':
-        $editsProductsController->addProduct();
+        $productsController->addProduct();
         break;
     case 'deleteProduct':
-        $editsProductsController->deleteProduct($params[1]);
+        $productsController->deleteProduct($params[1]);
         break;
     case 'editCategories':
         if(!empty($params[1]))
-            $editCategoriesController->showEditCategories($params[1]);
+            $categoriesController->showEditCategories($params[1]);
         else
-            $editCategoriesController->showEditCategories();
+            $categoriesController->showEditCategories();
         break;
     case 'editCategory':
-        $editCategoriesController->showEditCategory($params[1]);
+        $categoriesController->showEditCategory($params[1]);
         break;
     case 'updateCategory':
-        $editCategoriesController->updateCategory($params[1]);
+        $categoriesController->updateCategory($params[1]);
         break;
     case 'deleteCategory':
-        $editCategoriesController->deleteCategory($params[1]);
+        $categoriesController->deleteCategory($params[1]);
         break; 
     case 'addCategory':
-        $editCategoriesController->addCategory();
+        $categoriesController->addCategory();
         break;             
     default:
         $mainController->showNotFound();

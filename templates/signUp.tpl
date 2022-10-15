@@ -1,4 +1,5 @@
-{include file="header.tpl"}
+{include file="header.tpl" title="Registrarse"}
+
 <div class="mt-5 w-25 mx-auto">
     <form method="POST" action="validateSignUp">
         <div class="form-group">
@@ -29,7 +30,5 @@
         <button type="submit" class="btn btn-dark mt-3">Registrarse</button>
     </form>
 </div>
-
-
 
 {include file="footer.tpl"}

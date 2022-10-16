@@ -73,29 +73,28 @@ class usersController{
             $msg='El nombre de usuario es obligatorio.';
             $this->view->showSignUp($msg);;
         }
-        $name=$_POST['name'];
-        $lastName=$_POST['lastName'];
-        $userName=$_POST['userName'];
-        $password=$_POST['password'];
-        $checkPassword=$_POST['checkPassword'];
-        
-        if(empty($name)){
+        elseif(empty($_POST['name'])){
             $msg='El nombre es obligatorio.';
             $this->view->showSignUp($msg);
         }
-        elseif(empty($lastName)){
+        elseif(empty($_POST['lastName'])){
             $msg='El apellido es obligatorio.';
             $this->view->showSignUp($msg);
         }
-        elseif(empty($password)){
+        elseif(empty($_POST['password'])){
             $msg='La contraseña es obligatoria.';
             $this->view->showSignUp($msg);
         }
-        elseif(empty($checkPassword)){
+        elseif(empty($_POST['checkPassword'])){
             $msg='Tiene que confirmar la contraseña.';
             $this->view->showSignUp($msg);
         }
         else{
+            $name=$_POST['name'];
+            $lastName=$_POST['lastName'];
+            $userName=$_POST['userName'];
+            $password=$_POST['password'];
+            $checkPassword=$_POST['checkPassword'];
             if($password !=$checkPassword){
                 $msg='Las contraseñas no coinciden.';
                 $this->view->showSignUp($msg);
